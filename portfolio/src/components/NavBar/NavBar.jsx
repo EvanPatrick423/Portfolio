@@ -3,14 +3,28 @@ import viteLogo from '/vite.svg'
 import './NavBar.css'
 import GraphQLLogo from '../GraphQLLogo'
 
-function NavBar() {
+function NavBar({ onNavigate, currentPage }) {
   return (
     <header className="header">
       <div className="header-container">
         <nav className="nav-section">
           <ul className="nav-list">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
+            <li>
+              <button 
+                className={`nav-button ${currentPage === 'home' ? 'active' : ''}`}
+                onClick={() => onNavigate('home')}
+              >
+                Home
+              </button>
+            </li>
+            <li>
+              <button 
+                className={`nav-button ${currentPage === 'about' ? 'active' : ''}`}
+                onClick={() => onNavigate('about')}
+              >
+                About
+              </button>
+            </li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>

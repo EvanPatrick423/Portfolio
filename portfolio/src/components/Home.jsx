@@ -6,7 +6,7 @@ function Home() {
         <div className="home-header-section">
           <div className="home-header-text">
             <h1>Evan Patrick</h1>
-            <h1>Software Engineer, Web Developer</h1>
+            <h1>Software Engineer | Web Developer</h1>
           </div>
           <div className="profile-image">
             <img src="/src/assets/ProfessionalHeadShot.jfif" alt="Evan Patrick Professional Headshot" />
@@ -22,7 +22,10 @@ function Home() {
         </div>
 
         <div className="home-intro-section">
-          <h3>Hello world, this website serves as an active resume and portfolio of my work</h3>
+          <h3>
+            Hello world! This website serves as an active resume and portfolio of 
+            my work
+          </h3>
         </div>
         
 
