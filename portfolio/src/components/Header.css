@@ -25,35 +25,36 @@
 }
 
 .logo {
-  height: 2.5rem;
+  height: 3rem;
   width: auto;
+  will-change: filter;
   transition: transform 0.3s ease;
+  padding: .3em;
 }
 
 .logo:hover {
   transform: scale(1.1);
 }
 
+.logo.vite:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
 .logo.react {
   animation: spin 20s linear infinite;
 }
 
-.logo.graphql,
-.logo.nodejs {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  color: white;
-  font-weight: 600;
-  font-size: 0.9rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-.logo.graphql:hover,
-.logo.nodejs:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
+.logo.graphql {
+
+}
+
+.logo.graphql:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 2em color(display-p3 .8824 0 .5961));
 }
 
 .nav-section {

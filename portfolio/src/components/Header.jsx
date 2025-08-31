@@ -1,6 +1,7 @@
 import reactLogo from '../assets/react.svg'
 import viteLogo from '/vite.svg'
 import './Header.css'
+import GraphQLLogo from './GraphQLLogo'
 
 function Header() {
   return (
@@ -23,9 +24,7 @@ function Header() {
             <img src={reactLogo} className="logo react" alt="React logo" />
           </a>
           <a href="https://graphql.org" target="_blank" rel="noopener noreferrer">
-            <div className="logo graphql" alt="GraphQL logo">
-              <span>GraphQL</span>
-            </div>
+            <GraphQLLogo />
           </a>
         </div>
       </div>
