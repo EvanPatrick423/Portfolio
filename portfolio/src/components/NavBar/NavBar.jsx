@@ -1,9 +1,9 @@
-import reactLogo from '../assets/react.svg'
+import reactLogo from '../../assets/react.svg'
 import viteLogo from '/vite.svg'
-import './Header.css'
-import GraphQLLogo from './GraphQLLogo'
+import './NavBar.css'
+import GraphQLLogo from '../GraphQLLogo'
 
-function Header() {
+function NavBar() {
   return (
     <header className="header">
       <div className="header-container">
@@ -32,4 +32,4 @@ function Header() {
   )
 }
 
-export default Header 
+export default NavBar 
