@@ -3,9 +3,12 @@ import './Projects.css';
 import EtchASketchWidget from './PixelSketch/EtchASketchWidget';
 import CalculatorWidget from './Calculator/CalculatorWidget';
 import RockPaperScissorsWidget from './RockPaperScissors/RockPaperScissorsWidget';
+import TicTacToeWidget from './TicTacToe/TicTacToeWidget';
+import LibraryWidget from './Library/LibraryWidget';
+import ToDoWidget from './ToDo/ToDoWidget';
 
 const Projects = () => {
-  const [odinProjectPage, setOdinProjectPage] = useState('calculator');
+  const [odinProjectPage, setOdinProjectPage] = useState('pixelSketch');
 
   const projects = [
     {
@@ -38,12 +41,6 @@ const Projects = () => {
   ];
 
   const odinProjects = {
-    calculator: {
-      title: "Calculator",
-      description: "A fully functional calculator with basic arithmetic operations and a clean interface.",
-      technologies: ["HTML", "CSS", "JavaScript"],
-      features: ["Basic arithmetic operations", "Clear and delete functions", "Responsive design", "Keyboard support"]
-    },
     pixelSketch: {
       title: "Pixel Pad",
       description: "An interactive drawing application inspired by the classic Etch A Sketch toy.",
@@ -55,6 +52,12 @@ const Projects = () => {
       description: "A classic game with computer opponent and score tracking.",
       technologies: ["HTML", "CSS", "JavaScript"],
       features: ["Computer opponent", "Score tracking", "Game history", "Best of 5 mode"]
+    },
+    calculator: {
+      title: "Calculator",
+      description: "A fully functional calculator with basic arithmetic operations and a clean interface.",
+      technologies: ["HTML", "CSS", "JavaScript"],
+      features: ["Basic arithmetic operations", "Clear and delete functions", "Responsive design", "Keyboard support"]
     },
     ticTacToe: {
       title: "Tic Tac Toe",
@@ -94,6 +97,21 @@ const Projects = () => {
       return <RockPaperScissorsWidget />;
     }
     
+    // Render the Tic Tac Toe widget if that project is selected
+    if (odinProjectPage === 'ticTacToe') {
+      return <TicTacToeWidget />;
+    }
+    
+    // Render the Library widget if that project is selected
+    if (odinProjectPage === 'library') {
+      return <LibraryWidget />;
+    }
+    
+    // Render the ToDo widget if that project is selected
+    if (odinProjectPage === 'todo') {
+      return <ToDoWidget />;
+    }
+    
     return (
       <div className="odin-project-content">
         <h3 className="odin-project-title">{project.title}</h3>
@@ -107,6 +125,7 @@ const Projects = () => {
   return (
     <div className="projects-page">
       <div className="projects-container">
+        {/*}
         <h1 className="projects-title">My Projects</h1>
         
         <div className="projects-intro">
@@ -157,15 +176,16 @@ const Projects = () => {
             </div>
           ))}
         </div>
+        */}
 
         {/* Odin Project Section */}
         <div className="odin-project-section">
-          <h2 className="section-title">The Odin Project</h2>
+          <h2 className="odin-project-section-title">The Odin Project</h2>
           <p className="section-description">
             A collection of foundational projects completed during my web development learning journey.
           </p>
-          <p className="section-description">
-            each project was originally written in HTML, CSS, and JavaScript. I have converted them to React components for this implementation.
+          <p className="section-description-2">
+            Each project was originally written in HTML, CSS, and JavaScript. I have converted them to React components for this implementation.
           </p>
           
           <div className="odin-project-container">

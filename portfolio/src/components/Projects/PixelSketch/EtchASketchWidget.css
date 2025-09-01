@@ -287,8 +287,8 @@
 
 .grid-slider::-webkit-slider-thumb {
   appearance: none;
-  width: 24px;
-  height: 24px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: linear-gradient(135deg, #4ecdc4, #44a08d);
   cursor: pointer;
@@ -303,12 +303,12 @@
 }
 
 .grid-slider::-moz-range-thumb {
-  width: 24px;
-  height: 24px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: linear-gradient(135deg, #4ecdc4, #44a08d);
   cursor: pointer;
-  border: 3px solid rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 

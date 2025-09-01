@@ -33,7 +33,14 @@ function NavBar({ onNavigate, currentPage }) {
                 Projects
               </button>
             </li>
-            <li><a href="#contact">Contact</a></li>
+            <li>
+              <button 
+                className={`nav-button ${currentPage === 'contact' ? 'active' : ''}`}
+                onClick={() => onNavigate('contact')}
+              >
+                Contact
+              </button>
+            </li>
           </ul>
         </nav>
 

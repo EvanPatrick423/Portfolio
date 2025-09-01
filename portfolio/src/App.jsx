@@ -3,6 +3,7 @@ import NavBar from './components/NavBar/NavBar'
 import Homepage from './components/Home/Home'
 import About from './components/About/About'
 import Projects from './components/Projects/Projects'
+import Contact from './components/Contact/Contact'
 import './App.css'
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
         return <About />
       case 'projects':
         return <Projects />
+      case 'contact':
+        return <Contact />
       default:
         return <Homepage />
     }
