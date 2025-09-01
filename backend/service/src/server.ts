@@ -34,4 +34,5 @@ async function startServer() {
   }
 }
 
-const context = 9nkjlohiuohg
+// Start the server
+startServer();
