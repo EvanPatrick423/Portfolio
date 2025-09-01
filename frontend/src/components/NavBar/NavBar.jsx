@@ -2,6 +2,7 @@ import reactLogo from '../../assets/react.svg'
 import viteLogo from '/vite.svg'
 import './NavBar.css'
 import GraphQLLogo from './GraphQLLogo'
+import ApolloLogo from './ApolloLogo'
 
 function NavBar({ onNavigate, currentPage }) {
   return (
@@ -53,6 +54,9 @@ function NavBar({ onNavigate, currentPage }) {
           </a>
           <a href="https://graphql.org" target="_blank" rel="noopener noreferrer">
             <GraphQLLogo />
+          </a>
+          <a href="https://www.apollographql.com" target="_blank" rel="noopener noreferrer">
+            <ApolloLogo />
           </a>
         </div>
       </div>
