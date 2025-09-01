@@ -1,8 +1,5 @@
 import { GraphQLError } from 'graphql';
-
-// Mock data store (replace with actual database)
-let contacts: any[] = [];
-let contactIdCounter = 1;
+import { submitContactResolver, contacts } from './submitContactResolver.js';
 
 export const contactResolvers = {
   Query: {
@@ -19,25 +16,7 @@ export const contactResolvers = {
   },
 
   Mutation: {
-    submitContact: (_: any, { input }: { input: any }) => {
-      const newContact = {
-        id: String(contactIdCounter++),
-        ...input,
-        submittedAt: new Date().toISOString(),
-        status: 'PENDING',
-      };
-      
-      contacts.push(newContact);
-      
-      // Here you would typically:
-      // 1. Save to database
-      // 2. Send email notification
-      // 3. Trigger any webhooks
-      
-      console.log('📧 New contact submission:', newContact);
-      
-      return newContact;
-    },
+    submitContact: submitContactResolver,
 
     updateContactStatus: (_: any, { id, status }: { id: string; status: string }) => {
       const contactIndex = contacts.findIndex(c => c.id === id);
