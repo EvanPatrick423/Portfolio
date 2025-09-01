@@ -53,7 +53,6 @@
 }
 
 .logo.graphql:hover {
-  transform: scale(1.1);
   filter: drop-shadow(0 0 2em color(display-p3 .8824 0 .5961));
 }
 

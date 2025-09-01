@@ -12,7 +12,7 @@ function Home() {
             <img src="/src/assets/ProfessionalHeadShot.jfif" alt="Evan Patrick Professional Headshot" />
           </div>
           <div className="social-media-section">
-            <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer">
+            <a href="https://linkedin.com/in/evan-patrick-4824481b1/" target="_blank" rel="noopener noreferrer">
               <img src="/src/assets/linkedIn.png" alt="LinkedIn" className="social-icon" />
             </a>
             <a href="https://github.com/EvanPatrick423" target="_blank" rel="noopener noreferrer">

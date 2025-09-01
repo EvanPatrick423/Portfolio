@@ -1,7 +1,7 @@
 import reactLogo from '../../assets/react.svg'
 import viteLogo from '/vite.svg'
 import './NavBar.css'
-import GraphQLLogo from '../GraphQLLogo'
+import GraphQLLogo from './GraphQLLogo'
 
 function NavBar({ onNavigate, currentPage }) {
   return (
@@ -25,7 +25,14 @@ function NavBar({ onNavigate, currentPage }) {
                 About
               </button>
             </li>
-            <li><a href="#projects">Projects</a></li>
+            <li>
+              <button 
+                className={`nav-button ${currentPage === 'projects' ? 'active' : ''}`}
+                onClick={() => onNavigate('projects')}
+              >
+                Projects
+              </button>
+            </li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </nav>

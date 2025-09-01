@@ -79,7 +79,7 @@ const About = () => {
                   <ul className="experience-description">
                     <li>
                         Designed and implemented UI overhaul for internal loan processing application. 
-                        Merging 8 different pages into one clean interface that allowed users to see progress of different 
+                        Merging the UI into one clean interface that allowed users to see progress of different 
                         applications and have access to vital data needed to make decisions on loan applications. 
                         Reducing time to fund for our business from 7-8 to 3-4 days.
                     </li>

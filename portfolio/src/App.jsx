@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import NavBar from './components/NavBar/NavBar'
-import Homepage from './components/Home'
-import About from './components/About'
+import Homepage from './components/Home/Home'
+import About from './components/About/About'
+import Projects from './components/Projects/Projects'
 import './App.css'
 
 function App() {
@@ -13,6 +14,8 @@ function App() {
         return <Homepage />
       case 'about':
         return <About />
+      case 'projects':
+        return <Projects />
       default:
         return <Homepage />
     }
