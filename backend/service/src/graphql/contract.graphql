@@ -1,0 +1,23 @@
+# Contact Form Types
+type ContactSubmission {
+  id: ID!
+  name: String!
+  email: EmailAddress!
+  subject: String!
+  message: String!
+  submittedAt: DateTime!
+  status: ContactStatus!
+}
+
+input ContactInput {
+  name: String!
+  email: EmailAddress!
+  subject: String!
+  message: String!
+}
+
+enum ContactStatus {
+  PENDING
+  PROCESSED
+  REPLIED
+}
