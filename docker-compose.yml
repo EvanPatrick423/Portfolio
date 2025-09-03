@@ -4,10 +4,18 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"  # Frontend
-      - "4000:4000"  # Backend GraphQL API
+      - "${FRONTEND_PORT:-3000}:3000"  # Frontend
+      - "${PORT:-4000}:4000"  # Backend GraphQL API
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=${NODE_ENV:-production}
+      - PORT=${PORT:-4000}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - EMAIL_FROM=${EMAIL_FROM}
+      - EMAIL_TO=${EMAIL_TO}
+      - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:3000}
     volumes:
       - ./logs:/app/logs  # Persist logs
     restart: unless-stopped
@@ -17,6 +25,8 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+    networks:
+      - portfolio-network
 
   # Optional: Add a reverse proxy
   nginx:
@@ -30,3 +40,9 @@ services:
     restart: unless-stopped
     profiles:
       - nginx  # Only start with --profile nginx
+    networks:
+      - portfolio-network
+
+networks:
+  portfolio-network:
+    driver: bridge
