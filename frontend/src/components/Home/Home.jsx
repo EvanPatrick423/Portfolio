@@ -1,4 +1,7 @@
 import React from 'react';
+import professionalHeadshot from '../../assets/ProfessionalHeadShot.jfif';
+import linkedInIcon from '../../assets/linkedIn.png';
+import gitHubIcon from '../../assets/gitHubLogo.png';
 
 function Home() {
   return (
@@ -9,14 +12,14 @@ function Home() {
             <h1>Software Engineer | Web Developer</h1>
           </div>
           <div className="profile-image">
-            <img src="/src/assets/ProfessionalHeadShot.jfif" alt="Evan Patrick Professional Headshot" />
+            <img src={professionalHeadshot} alt="Evan Patrick Professional Headshot" />
           </div>
           <div className="social-media-section">
             <a href="https://linkedin.com/in/evan-patrick-4824481b1/" target="_blank" rel="noopener noreferrer">
-              <img src="/src/assets/linkedIn.png" alt="LinkedIn" className="social-icon" />
+              <img src={linkedInIcon} alt="LinkedIn" className="social-icon" />
             </a>
             <a href="https://github.com/EvanPatrick423" target="_blank" rel="noopener noreferrer">
-              <img src="/src/assets/gitHubLogo.png" alt="GitHub" className="social-icon" />
+              <img src={gitHubIcon} alt="GitHub" className="social-icon" />
             </a>
           </div>
         </div>
