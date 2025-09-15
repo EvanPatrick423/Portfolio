@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import './Contact.css';
 
+// Import Apollo Client hooks
+import { useMutation } from '@apollo/client/react';
+import { SUBMIT_CONTACT } from '../../graphql/mutations';
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -11,6 +15,23 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
+
+  const [submitContact] = useMutation(SUBMIT_CONTACT, {
+    onCompleted: (data) => {
+      console.log('Contact submitted successfully:', data);
+      setSubmitMessage('Thank you for your message! I\'ll get back to you soon.');
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+    },
+    onError: (error) => {
+      console.error('Error submitting contact:', error);
+      setSubmitMessage('Sorry, there was an error sending your message. Please try again.');
+    }
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,20 +46,20 @@ const Contact = () => {
     setIsSubmitting(true);
     setSubmitMessage('');
 
-    // Simulate form submission (replace with actual email service)
     try {
-      // Here you would typically send the data to your backend or email service
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      setSubmitMessage('Thank you for your message! I\'ll get back to you soon.');
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
+      await submitContact({
+        variables: {
+          input: {
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message
+          }
+        }
       });
     } catch (error) {
-      setSubmitMessage('Sorry, there was an error sending your message. Please try again.');
+      // Error handling is done in the onError callback
+      console.error('Submission error:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -50,6 +71,10 @@ const Contact = () => {
         <div className="contact-header">
           <h1>Get In Touch</h1>
           <p>I'd love to hear from you! Whether you have a project in mind, want to collaborate, or just want to say hello, feel free to reach out.</p>
+        </div>
+
+        <div className="email-disclaimer">
+          <p><strong>📧 Email Confirmation:</strong> You'll receive a confirmation email from my personal Gmail address after submitting this form. This was the only free smtp server I could find. Please check your spam folder if you don't see it in your inbox.</p>
         </div>
 
         <div className="contact-body">

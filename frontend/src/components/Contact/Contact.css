@@ -21,7 +21,7 @@
 .contact-header {
   text-align: center;
   padding: 3rem 2rem 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  
   color: white;
 }
 
@@ -44,6 +44,26 @@
   grid-template-columns: 1fr 2fr;
   gap: 3rem;
   padding: 3rem;
+}
+
+.email-disclaimer {
+  background: rgba(255, 193, 7, 0.1);
+  border-left: 4px solid #ffc107;
+  border-radius: 0;
+  padding: 1rem 3rem;
+  margin: 0;
+  border-top: 1px solid rgba(255, 193, 7, 0.2);
+}
+
+.email-disclaimer p {
+  margin: 0;
+  color: #ffffff;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.email-disclaimer strong {
+  color: #ffc107;
 }
 
 .contact-info h2 {

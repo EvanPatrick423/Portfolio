@@ -2,48 +2,6 @@
 scalar DateTime
 scalar EmailAddress
 
-# Project Types
-type Project {
-  id: ID!
-  title: String!
-  description: String!
-  technologies: [String!]!
-  githubUrl: String
-  liveUrl: String
-  imageUrl: String
-  featured: Boolean!
-  createdAt: DateTime!
-}
-
-input ProjectInput {
-  title: String!
-  description: String!
-  technologies: [String!]!
-  githubUrl: String
-  liveUrl: String
-  imageUrl: String
-  featured: Boolean = false
-}
-
-# User/About Types
-type User {
-  id: ID!
-  name: String!
-  email: EmailAddress!
-  bio: String
-  location: String
-  resumeUrl: String
-  skills: [String!]!
-  socialLinks: SocialLinks
-}
-
-type SocialLinks {
-  github: String
-  linkedin: String
-  twitter: String
-  website: String
-}
-
 # Root Types
 type Query {
   # Health check
@@ -52,34 +10,12 @@ type Query {
   # Contact queries
   contacts: [ContactSubmission!]!
   contact(id: ID!): ContactSubmission
-  
-  # Project queries
-  projects: [Project!]!
-  project(id: ID!): Project
-  featuredProjects: [Project!]!
-  
-  # User queries
-  me: User
 }
 
 type Mutation {
   # Contact mutations
   submitContact(input: ContactInput!): ContactSubmission!
   updateContactStatus(id: ID!, status: ContactStatus!): ContactSubmission!
-  
-  # Project mutations
-  createProject(input: ProjectInput!): Project!
-  updateProject(id: ID!, input: ProjectInput!): Project!
-  deleteProject(id: ID!): Boolean!
-  
-  # User mutations
-  updateProfile(
-    name: String
-    bio: String
-    location: String
-    resumeUrl: String
-    skills: [String!]
-  ): User!
 }
 
 type Subscription {

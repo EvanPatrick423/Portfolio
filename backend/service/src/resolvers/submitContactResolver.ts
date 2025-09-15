@@ -1,22 +1,25 @@
 import { GraphQLError } from 'graphql';
-
-// Mock data store (replace with actual database)
-// Note: In a real application, this would be imported from a shared data layer
-const contacts: any[] = [];
-let contactIdCounter = 1;
+import { emailService } from '../services/emailService';
+import type { ContactInput, ContactSubmission, Mutation } from '../graphql.js';
+import { ContactStatus } from '../graphql.js';
 
 /**
  * Submit Contact Resolver
  * Handles the submission of new contact forms
  */
-export const submitContactResolver = (_: any, { input }: { input: any }) => {
+export const submitContactResolver = async (_parent: Mutation, { input }: { input: ContactInput }): Promise<ContactSubmission> => {
   try {
     // Validate required fields
-    if (!input.name || !input.email || !input.message) {
+    const missingFields: string[] = [];
+    if (!input.name) missingFields.push('name');
+    if (!input.email) missingFields.push('email');
+    if (!input.message) missingFields.push('message');
+    
+    if (missingFields.length > 0) {
       throw new GraphQLError('Missing required fields: name, email, and message are required', {
         extensions: { 
           code: 'VALIDATION_ERROR',
-          invalidFields: ['name', 'email', 'message'].filter(field => !input[field])
+          invalidFields: missingFields
         }
       });
     }
@@ -32,34 +35,51 @@ export const submitContactResolver = (_: any, { input }: { input: any }) => {
       });
     }
 
-    // Create new contact entry
-    const newContact = {
-      id: String(contactIdCounter++),
-      ...input,
-      submittedAt: new Date().toISOString(),
-      status: 'PENDING',
-    };
-    
-    // Store the contact (in a real app, this would be a database save)
-    contacts.push(newContact);
-    
-    // Future enhancements could include:
-    // 1. Save to database with proper ORM/query builder
-    // 2. Send email notification to admin
-    // 3. Send confirmation email to user
-    // 4. Trigger webhooks for integrations
-    // 5. Add to CRM system
-    // 6. Spam detection
-    // 7. Rate limiting per IP/email
-    
     console.log('📧 New contact submission:', {
-      id: newContact.id,
-      name: newContact.name,
-      email: newContact.email,
-      submittedAt: newContact.submittedAt
+      name: input.name,
+      email: input.email,
+      subject: input.subject,
+      submittedAt: new Date().toISOString()
     });
+
+    // Send email notifications
+    try {
+      await emailService.sendContactEmails({
+        name: input.name,
+        email: input.email,
+        subject: input.subject,
+        message: input.message,
+        submittedAt: new Date().toISOString()
+      });
+      
+      console.log('✅ Contact emails sent successfully');
+    } catch (emailError) {
+      console.error('❌ Failed to send contact emails:', emailError);
+      
+      // If it's an email configuration error, throw it to the frontend
+      if (emailError instanceof GraphQLError) {
+        throw emailError;
+      }
+      
+      // For other email errors, throw a user-friendly error
+      throw new GraphQLError('Failed to send email notification. Please try again or contact support.', {
+        extensions: { 
+          code: 'EMAIL_SEND_ERROR',
+          originalError: emailError instanceof Error ? emailError.message : 'Unknown email error'
+        }
+      });
+    }
     
-    return newContact;
+    // Return a simple success response
+    return {
+      id: '1', // Placeholder ID since we're not storing
+      name: input.name,
+      email: input.email,
+      subject: input.subject,
+      message: input.message,
+      submittedAt: new Date().toISOString(),
+      status: ContactStatus.Pending
+    };
     
   } catch (error) {
     // Log error for debugging
@@ -79,7 +99,3 @@ export const submitContactResolver = (_: any, { input }: { input: any }) => {
     });
   }
 };
-
-// Export the contacts array for other resolvers to use
-// In a real app, this would be replaced with database queries
-export { contacts, contactIdCounter };

@@ -1,7 +1,11 @@
+import dotenv from 'dotenv';
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { resolvers } from './resolvers.js';
 import { loadFilesSync } from '@graphql-tools/load-files';
+
+// Load environment variables from .env file
+dotenv.config();
 
 // Create Apollo Server instance
 const server = new ApolloServer({

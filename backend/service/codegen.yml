@@ -7,8 +7,9 @@ generates:
       - "typescript-resolvers"
     config:
       useIndexSignature: true
-      contextType: "../types/context#Context"
+      contextType: "./types/context#Context"
+      scalars:
+        DateTime: string
+        EmailAddress: string
       mappers:
-        User: "../types/models#UserModel"
-        Project: "../types/models#ProjectModel"
-        ContactSubmission: "../types/models#ContactSubmissionModel"
+        ContactSubmission: "./types/models#ContactSubmissionModel"
