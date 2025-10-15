@@ -9,7 +9,7 @@ dotenv.config();
 
 // Create Apollo Server instance
 const server = new ApolloServer({
-  typeDefs: loadFilesSync('src/graphql/**/*.graphql'),
+  typeDefs: loadFilesSync('./src/graphql/**/*.graphql'),
   resolvers,
   // Enable GraphQL Playground in development
   introspection: process.env.NODE_ENV !== 'production',

@@ -33,10 +33,17 @@ if ! command -v docker &> /dev/null; then
     exit 1
 fi
 
-# Check if Docker Compose is installed
-if ! command -v docker-compose &> /dev/null; then
+# Check if Docker Compose is installed (v2 or v1)
+if ! command -v docker compose &> /dev/null && ! command -v docker-compose &> /dev/null; then
     print_error "Docker Compose is not installed. Please install Docker Compose first."
     exit 1
+fi
+
+# Use the correct docker compose command
+if command -v docker compose &> /dev/null; then
+    DOCKER_COMPOSE="docker compose"
+else
+    DOCKER_COMPOSE="docker-compose"
 fi
 
 print_status "Docker and Docker Compose are installed ✓"
@@ -54,9 +61,9 @@ FRONTEND_PORT=3000
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_USER=your_email@gmail.com
-SMTP_PASSWORD=your_app_password
+SMTP_PASS=your_app_password
 EMAIL_FROM=your_email@gmail.com
-EMAIL_TO=your_contact_email@gmail.com
+ADMIN_EMAIL=your_contact_email@gmail.com
 
 # Security
 CORS_ORIGIN=http://localhost
@@ -73,42 +80,43 @@ print_status "Created logs directory ✓"
 
 # Pull latest images (if any)
 print_status "Pulling latest base images..."
-docker-compose pull --ignore-pull-failures || true
+$DOCKER_COMPOSE pull --ignore-pull-failures || true
 
 # Stop existing containers
 print_status "Stopping existing containers..."
-docker-compose down || true
+$DOCKER_COMPOSE down || true
 
 # Build and start containers
 print_status "Building and starting containers..."
-docker-compose up --build -d
+$DOCKER_COMPOSE up --build -d
 
 # Wait for services to be ready
 print_status "Waiting for services to start..."
 sleep 10
 
 # Check if services are running
-if docker-compose ps | grep -q "Up"; then
+if $DOCKER_COMPOSE ps | grep -q "Up"; then
     print_status "Services are running ✓"
     
     # Display running services
     echo
     echo "=== Running Services ==="
-    docker-compose ps
+    $DOCKER_COMPOSE ps
     
     echo
     echo "=== Application URLs ==="
-    echo "Frontend: http://localhost:3000"
+    echo "Frontend: http://localhost (port 80)"
     echo "GraphQL API: http://localhost:4000/graphql"
     echo "GraphQL Playground: http://localhost:4000/graphql"
+    echo "Nginx: http://localhost (serves frontend + proxies /graphql)"
     
     # Show logs
     echo
     print_status "Showing recent logs (press Ctrl+C to exit)..."
-    docker-compose logs --tail=50 -f
+    $DOCKER_COMPOSE logs --tail=50 -f
     
 else
     print_error "Some services failed to start. Checking logs..."
-    docker-compose logs
+    $DOCKER_COMPOSE logs
     exit 1
 fi

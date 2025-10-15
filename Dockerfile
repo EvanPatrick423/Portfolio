@@ -4,7 +4,7 @@
 FROM node:18-alpine AS frontend-builder
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
-RUN npm ci --only=production
+RUN npm ci
 COPY frontend/ ./
 RUN npm run build
 
@@ -27,18 +27,16 @@ RUN npm install -g pm2
 COPY --from=backend-builder /app/backend/dist ./backend/dist
 COPY --from=backend-builder /app/backend/node_modules ./backend/node_modules
 COPY --from=backend-builder /app/backend/package*.json ./backend/
+COPY --from=backend-builder /app/backend/src/graphql ./backend/src/graphql
 
-# Copy frontend build
+# Copy frontend build (nginx will serve this via shared volume)
 COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
 
-# Install serve to serve the frontend
-RUN npm install -g serve
-
-# Create PM2 ecosystem file
+# Copy PM2 ecosystem file
 COPY ecosystem.config.js ./
 
-# Expose ports
-EXPOSE 3000 4000
+# Expose backend port only (nginx serves frontend)
+EXPOSE 4000
 
 # Install curl for health checks
 RUN apk add --no-cache curl
@@ -47,5 +45,5 @@ RUN apk add --no-cache curl
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD curl -f http://localhost:4000/graphql || exit 1
 
-# Start both services using PM2
+# Start backend service using PM2
 CMD ["pm2-runtime", "start", "ecosystem.config.js"]

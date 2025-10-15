@@ -1,5 +1,5 @@
 import { GraphQLError } from 'graphql';
-import { emailService } from '../services/emailService';
+import { emailService } from '../services/emailService.js';
 import type { ContactInput, ContactSubmission, Mutation } from '../graphql.js';
 import { ContactStatus } from '../graphql.js';
 

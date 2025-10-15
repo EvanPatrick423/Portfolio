@@ -3,8 +3,8 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
+      target: production
     ports:
-      - "${FRONTEND_PORT:-3000}:3000"  # Frontend
       - "${PORT:-4000}:4000"  # Backend GraphQL API
     environment:
       - NODE_ENV=${NODE_ENV:-production}
@@ -12,12 +12,13 @@ services:
       - SMTP_HOST=${SMTP_HOST}
       - SMTP_PORT=${SMTP_PORT:-587}
       - SMTP_USER=${SMTP_USER}
-      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - SMTP_PASS=${SMTP_PASS}
       - EMAIL_FROM=${EMAIL_FROM}
-      - EMAIL_TO=${EMAIL_TO}
-      - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:3000}
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost}
     volumes:
       - ./logs:/app/logs  # Persist logs
+      - frontend-dist:/app/frontend/dist:ro  # Share frontend build with nginx
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:4000/graphql"]
@@ -28,20 +29,21 @@ services:
     networks:
       - portfolio-network
 
-  # Optional: Add a reverse proxy
   nginx:
     image: nginx:alpine
     ports:
-      - "80:80"
+      - "${NGINX_PORT:-80}:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - frontend-dist:/usr/share/nginx/html:ro  # Mount frontend static files
     depends_on:
       - portfolio
     restart: unless-stopped
-    profiles:
-      - nginx  # Only start with --profile nginx
     networks:
       - portfolio-network
+
+volumes:
+  frontend-dist:
 
 networks:
   portfolio-network:
