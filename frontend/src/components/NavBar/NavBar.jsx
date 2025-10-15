@@ -1,8 +1,11 @@
-import reactLogo from '../../assets/react.svg'
-import viteLogo from '/vite.svg'
-import './NavBar.css'
-import GraphQLLogo from './GraphQLLogo'
-import ApolloLogo from './ApolloLogo'
+'use client';
+
+import Image from 'next/image';
+import reactLogo from '../../assets/react.svg';
+import viteLogo from '../../../public/vite.svg';
+import './NavBar.css';
+import GraphQLLogo from './GraphQLLogo';
+import ApolloLogo from './ApolloLogo';
 
 function NavBar({ onNavigate, currentPage }) {
   return (
@@ -47,10 +50,10 @@ function NavBar({ onNavigate, currentPage }) {
 
         <div className="logo-section">
           <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
+            <Image src={viteLogo} className="logo" alt="Vite logo" width={48} height={48} />
           </a>
           <a href="https://react.dev" target="_blank" rel="noopener noreferrer">
-            <img src={reactLogo} className="logo react" alt="React logo" />
+            <Image src={reactLogo} className="logo react" alt="React logo" width={48} height={48} />
           </a>
           <a href="https://graphql.org" target="_blank" rel="noopener noreferrer">
             <GraphQLLogo />
@@ -61,7 +64,7 @@ function NavBar({ onNavigate, currentPage }) {
         </div>
       </div>
     </header>
-  )
+  );
 }
 
-export default NavBar 
+export default NavBar;

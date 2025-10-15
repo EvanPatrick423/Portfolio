@@ -1,9 +1,11 @@
+'use client';
+
 import React, { useState } from 'react';
 import './Contact.css';
 
 // Import Apollo Client hooks
 import { useMutation } from '@apollo/client/react';
-import { SUBMIT_CONTACT } from '../../graphql/mutations';
+import { SUBMIT_CONTACT } from '../../lib/graphql/mutations';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +21,7 @@ const Contact = () => {
   const [submitContact] = useMutation(SUBMIT_CONTACT, {
     onCompleted: (data) => {
       console.log('Contact submitted successfully:', data);
-      setSubmitMessage('Thank you for your message! I\'ll get back to you soon.');
+      setSubmitMessage("Thank you for your message! I'll get back to you soon.");
       setFormData({
         name: '',
         email: '',
@@ -70,16 +72,16 @@ const Contact = () => {
       <div className="contact-content">
         <div className="contact-header">
           <h1>Get In Touch</h1>
-          <p>I'd love to hear from you! Whether you have a project in mind, want to collaborate, or just want to say hello, feel free to reach out.</p>
+          <p>I&apos;d love to hear from you! Whether you have a project in mind, want to collaborate, or just want to say hello, feel free to reach out.</p>
         </div>
 
         <div className="email-disclaimer">
-          <p><strong>📧 Email Confirmation:</strong> You'll receive a confirmation email from my personal Gmail address after submitting this form. This was the only free smtp server I could find. Please check your spam folder if you don't see it in your inbox.</p>
+          <p><strong>📧 Email Confirmation:</strong> You&apos;ll receive a confirmation email from my personal Gmail address after submitting this form. This was the only free smtp server I could find. Please check your spam folder if you don&apos;t see it in your inbox.</p>
         </div>
 
         <div className="contact-body">
           <div className="contact-info">
-            <h2>Let's Connect</h2>
+            <h2>Let&apos;s Connect</h2>
             <div className="contact-item">
               <h3>Email</h3>
               <p>EvanPatrick3@protonmail.com</p>
@@ -130,7 +132,7 @@ const Contact = () => {
                 value={formData.subject}
                 onChange={handleChange}
                 required
-                placeholder="What's this about?"
+                placeholder="What&apos;s this about?"
               />
             </div>
 

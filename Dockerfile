@@ -1,6 +1,6 @@
-# Multi-stage Dockerfile for Portfolio Project
+# Multi-stage Dockerfile for Portfolio Project (Next.js)
 
-# Stage 1: Build Frontend
+# Stage 1: Build Frontend (Next.js)
 FROM node:18-alpine AS frontend-builder
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
@@ -16,26 +16,36 @@ RUN npm ci
 COPY backend/service/ ./
 RUN npm run build
 
-# Stage 3: Production Runtime
-FROM node:18-alpine AS production
-WORKDIR /app
+# Stage 3: Frontend Production Runtime
+FROM node:18-alpine AS frontend-production
+WORKDIR /app/frontend
 
-# Install PM2 for process management
-RUN npm install -g pm2
+# Copy Next.js build artifacts
+COPY --from=frontend-builder /app/frontend/.next ./.next
+COPY --from=frontend-builder /app/frontend/public ./public
+COPY --from=frontend-builder /app/frontend/package*.json ./
+COPY --from=frontend-builder /app/frontend/next.config.js ./
+
+# Install production dependencies only
+RUN npm ci --production
+
+# Expose Next.js port
+EXPOSE 3000
+
+# Start Next.js
+CMD ["npm", "start"]
+
+# Stage 4: Backend Production Runtime
+FROM node:18-alpine AS backend-production
+WORKDIR /app/backend
 
 # Copy backend build and dependencies
-COPY --from=backend-builder /app/backend/dist ./backend/dist
-COPY --from=backend-builder /app/backend/node_modules ./backend/node_modules
-COPY --from=backend-builder /app/backend/package*.json ./backend/
-COPY --from=backend-builder /app/backend/src/graphql ./backend/src/graphql
+COPY --from=backend-builder /app/backend/dist ./dist
+COPY --from=backend-builder /app/backend/node_modules ./node_modules
+COPY --from=backend-builder /app/backend/package*.json ./
+COPY --from=backend-builder /app/backend/src/graphql ./src/graphql
 
-# Copy frontend build (nginx will serve this via shared volume)
-COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
-
-# Copy PM2 ecosystem file
-COPY ecosystem.config.js ./
-
-# Expose backend port only (nginx serves frontend)
+# Expose backend port
 EXPOSE 4000
 
 # Install curl for health checks
@@ -45,5 +55,5 @@ RUN apk add --no-cache curl
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD curl -f http://localhost:4000/graphql || exit 1
 
-# Start backend service using PM2
-CMD ["pm2-runtime", "start", "ecosystem.config.js"]
+# Start backend service
+CMD ["node", "dist/server.js"]

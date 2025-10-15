@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 const GraphQLLogo = () => {
@@ -24,4 +26,4 @@ const GraphQLLogo = () => {
   );
 };
 
-export default GraphQLLogo; 
+export default GraphQLLogo;

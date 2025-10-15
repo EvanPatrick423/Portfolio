@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import './Projects.css';
 import EtchASketchWidget from './PixelSketch/EtchASketchWidget';
@@ -15,7 +17,7 @@ const Projects = () => {
       id: 1,
       title: "Portfolio Website",
       description: "A modern, responsive portfolio website built with React and CSS. Features dark theme, smooth navigation, and professional design.",
-      technologies: ["React", "CSS3", "JavaScript", "Vite"],
+      technologies: ["React", "CSS3", "JavaScript", "Next.js"],
       image: "/src/assets/portfolio-preview.jpg",
       githubLink: "https://github.com/EvanPatrick423/portfolio",
       liveLink: "#"
@@ -215,4 +217,4 @@ const Projects = () => {
   );
 };
 
-export default Projects; 
+export default Projects;

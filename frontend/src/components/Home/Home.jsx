@@ -1,7 +1,7 @@
+'use client';
+
 import React from 'react';
-import professionalHeadshot from '../../assets/ProfessionalHeadShot.jfif';
-import linkedInIcon from '../../assets/linkedIn.png';
-import gitHubIcon from '../../assets/gitHubLogo.png';
+import Image from 'next/image';
 
 function Home() {
   return (
@@ -12,14 +12,14 @@ function Home() {
             <h1>Software Engineer | Web Developer</h1>
           </div>
           <div className="profile-image">
-            <img src={professionalHeadshot} alt="Evan Patrick Professional Headshot" />
+            <Image src="/ProfessionalHeadShot.jfif" alt="Evan Patrick Professional Headshot" width={200} height={200} />
           </div>
           <div className="social-media-section">
             <a href="https://linkedin.com/in/evan-patrick-4824481b1/" target="_blank" rel="noopener noreferrer">
-              <img src={linkedInIcon} alt="LinkedIn" className="social-icon" />
+              <Image src="/linkedIn.png" alt="LinkedIn" className="social-icon" width={40} height={40} />
             </a>
             <a href="https://github.com/EvanPatrick423" target="_blank" rel="noopener noreferrer">
-              <img src={gitHubIcon} alt="GitHub" className="social-icon" />
+              <Image src="/gitHubLogo.png" alt="GitHub" className="social-icon" width={40} height={40} />
             </a>
           </div>
         </div>

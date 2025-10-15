@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import './About.css';
 
@@ -13,7 +15,7 @@ const About = () => {
             <h3>Software Engineer & Web Developer</h3>
             
             <p>
-              I'm a passionate software engineer and web developer with a strong foundation in modern web technologies. 
+              I&apos;m a passionate software engineer and web developer with a strong foundation in modern web technologies. 
               I specialize in creating responsive, user-friendly applications that solve real-world problems.
             </p>
             
@@ -30,10 +32,10 @@ const About = () => {
                   <h4>Frontend</h4>
                   <ul>
                     <li>React.js</li>
+                    <li>Next.js</li>
                     <li>JavaScript (ES6+)</li>
                     <li>HTML5 & CSS3</li>
                     <li>TypeScript</li>
-                    {/*<li>Tailwind CSS</li>*/}
                   </ul>
                 </div>
                 
@@ -44,7 +46,6 @@ const About = () => {
                     <li>Express.js</li>
                     <li>GraphQL</li>
                     <li>REST APIs</li>
-                    {/*<li>Database Design</li>*/}
                   </ul>
                 </div>
                 
@@ -53,8 +54,7 @@ const About = () => {
                   <ul>
                     <li>Git & GitHub</li>
                     <li>VS Code</li>
-                    <li>Vite</li>
-                    {/*<li>Webpack</li>*/}
+                    <li>Next.js</li>
                     <li>Docker</li>
                   </ul>
                 </div>
@@ -64,7 +64,7 @@ const About = () => {
             <div className="experience-section">
               <h3>Experience</h3>
               <p>
-                A software developer with over 4 years of experience in profesional development enviornments. I've worked on various projects ranging from personal portfolio websites to full-stack applications. 
+                A software developer with over 4 years of experience in profesional development enviornments. I&apos;ve worked on various projects ranging from personal portfolio websites to full-stack applications. 
                 Each project has taught me valuable lessons about user experience, performance optimization, 
                 and the importance of writing scalable code.
               </p>
@@ -127,10 +127,10 @@ const About = () => {
             </div>
             
             <div className="contact-section">
-              <h3>Let's Connect</h3>
+              <h3>Let&apos;s Connect</h3>
               <p>
-                I'm always interested in new opportunities and collaborations. 
-                Feel free to reach out if you'd like to discuss potential projects or just want to connect!
+                I&apos;m always interested in new opportunities and collaborations. 
+                Feel free to reach out if you&apos;d like to discuss potential projects or just want to connect!
               </p>
             </div>
           </div>
@@ -140,4 +140,4 @@ const About = () => {
   );
 };
 
-export default About; 
+export default About;

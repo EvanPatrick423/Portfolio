@@ -19,9 +19,10 @@ case "$1" in
     echo "🚀 Starting portfolio application..."
     docker compose up -d
     echo "✅ Application started!"
-    echo "🌐 Frontend: http://localhost (port 80 via nginx)"
+    echo "🌐 Frontend (Next.js): http://localhost (port 80 via nginx)"
     echo "🔗 GraphQL API: http://localhost/graphql (proxied via nginx)"
-    echo "🔗 Direct API: http://localhost:4000/graphql"
+    echo "🔗 Direct Frontend: http://localhost:3000"
+    echo "🔗 Direct Backend: http://localhost:4000/graphql"
     ;;
   
   "stop")
@@ -57,8 +58,8 @@ case "$1" in
     echo "Usage: $0 {build|start|stop|restart|logs|status|clean}"
     echo ""
     echo "Commands:"
-    echo "  build    - Build the Docker image"
-    echo "  start    - Start the application (nginx + backend)"
+    echo "  build    - Build the Docker images (Next.js frontend + backend)"
+    echo "  start    - Start the application (nginx + frontend + backend)"
     echo "  stop     - Stop the application"
     echo "  restart  - Restart the application"
     echo "  logs     - Show application logs"

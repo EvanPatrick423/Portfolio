@@ -55,7 +55,12 @@ if [ ! -f .env ]; then
 # Application Settings
 NODE_ENV=production
 PORT=4000
+BACKEND_PORT=4000
 FRONTEND_PORT=3000
+NGINX_PORT=80
+
+# Next.js Settings
+NEXT_PUBLIC_GRAPHQL_URL=http://localhost/graphql
 
 # Email Settings (configure these for contact form to work)
 SMTP_HOST=smtp.gmail.com
@@ -66,7 +71,7 @@ EMAIL_FROM=your_email@gmail.com
 ADMIN_EMAIL=your_contact_email@gmail.com
 
 # Security
-CORS_ORIGIN=http://localhost
+CORS_ORIGIN=http://localhost:3000
 EOF
     print_warning "Please edit .env file with your actual configuration before running this script again."
     exit 1
@@ -105,10 +110,10 @@ if $DOCKER_COMPOSE ps | grep -q "Up"; then
     
     echo
     echo "=== Application URLs ==="
-    echo "Frontend: http://localhost (port 80)"
-    echo "GraphQL API: http://localhost:4000/graphql"
-    echo "GraphQL Playground: http://localhost:4000/graphql"
-    echo "Nginx: http://localhost (serves frontend + proxies /graphql)"
+    echo "Frontend (Next.js): http://localhost (port 80 via nginx)"
+    echo "GraphQL API: http://localhost/graphql (proxied via nginx)"
+    echo "Direct Frontend: http://localhost:3000"
+    echo "Direct Backend: http://localhost:4000/graphql"
     
     # Show logs
     echo
