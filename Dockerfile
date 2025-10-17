@@ -16,6 +16,25 @@ RUN npm ci
 COPY backend/service/ ./
 RUN npm run build
 
+# Development Stage: Frontend (Hot Reload)
+FROM node:18-alpine AS frontend-development
+WORKDIR /app/frontend
+COPY frontend/package*.json ./
+RUN npm ci
+# Source code will be mounted as volume
+EXPOSE 3000
+CMD ["npm", "run", "dev"]
+
+# Development Stage: Backend (Hot Reload)
+FROM node:18-alpine AS backend-development
+WORKDIR /app/backend
+RUN apk add --no-cache curl
+COPY backend/service/package*.json ./
+RUN npm ci
+# Source code will be mounted as volume
+EXPOSE 4000
+CMD ["npm", "run", "dev"]
+
 # Stage 3: Frontend Production Runtime
 FROM node:18-alpine AS frontend-production
 WORKDIR /app/frontend

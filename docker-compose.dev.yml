@@ -1,0 +1,74 @@
+services:
+  backend:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: backend-development
+    ports:
+      - "${BACKEND_PORT:-4000}:4000"
+    environment:
+      - NODE_ENV=development
+      - PORT=${PORT:-4000}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - EMAIL_FROM=${EMAIL_FROM}
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - CORS_ORIGIN=${CORS_ORIGIN:-http://localhost:3000}
+    volumes:
+      - ./backend/service/src:/app/backend/src
+      - ./backend/service/package.json:/app/backend/package.json
+      - ./backend/service/tsconfig.json:/app/backend/tsconfig.json
+      - ./logs:/app/backend/logs
+      # Don't mount node_modules - keep container's version
+      - /app/backend/node_modules
+    restart: unless-stopped
+    networks:
+      - portfolio-network
+
+  frontend:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: frontend-development
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_GRAPHQL_URL=${NEXT_PUBLIC_GRAPHQL_URL:-http://localhost:4000/graphql}
+      # Enable Next.js fast refresh
+      - WATCHPACK_POLLING=true
+    volumes:
+      - ./frontend/src:/app/frontend/src
+      - ./frontend/public:/app/frontend/public
+      - ./frontend/package.json:/app/frontend/package.json
+      - ./frontend/next.config.js:/app/frontend/next.config.js
+      - ./frontend/tsconfig.json:/app/frontend/tsconfig.json
+      # Don't mount node_modules - keep container's version
+      - /app/frontend/node_modules
+      # Don't mount .next - keep container's version
+      - /app/frontend/.next
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - portfolio-network
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "${NGINX_PORT:-80}:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+      - backend
+    restart: unless-stopped
+    networks:
+      - portfolio-network
+
+networks:
+  portfolio-network:
+    driver: bridge
+
