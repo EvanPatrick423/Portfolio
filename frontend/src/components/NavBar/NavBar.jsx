@@ -1,9 +1,8 @@
 'use client';
 
-import Image from 'next/image';
-import reactLogo from '../../assets/react.svg';
-import viteLogo from '../../../public/vite.svg';
 import './NavBar.css';
+import NextJsLogo from './NextJsLogo';
+import ReactLogo from './ReactLogo';
 import GraphQLLogo from './GraphQLLogo';
 import ApolloLogo from './ApolloLogo';
 
@@ -49,11 +48,11 @@ function NavBar({ onNavigate, currentPage }) {
         </nav>
 
         <div className="logo-section">
-          <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
-            <Image src={viteLogo} className="logo" alt="Vite logo" width={48} height={48} />
+          <a href="https://nextjs.org" target="_blank" rel="noopener noreferrer">
+            <NextJsLogo />
           </a>
           <a href="https://react.dev" target="_blank" rel="noopener noreferrer">
-            <Image src={reactLogo} className="logo react" alt="React logo" width={48} height={48} />
+            <ReactLogo />
           </a>
           <a href="https://graphql.org" target="_blank" rel="noopener noreferrer">
             <GraphQLLogo />

@@ -1,11 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import NavBar from '../components/NavBar/NavBar';
-import Homepage from '../components/Home/Home';
-import About from '../components/About/About';
-import Projects from '../components/Projects/Projects';
-import Contact from '../components/Contact/Contact';
+
+// Dynamically import components with no SSR to prevent hydration issues
+const Homepage = dynamic(() => import('../components/Home/Home'), { ssr: false });
+const About = dynamic(() => import('../components/About/About'), { ssr: false });
+const Projects = dynamic(() => import('../components/Projects/Projects'), { ssr: false });
+const Contact = dynamic(() => import('../components/Contact/Contact'), { ssr: false });
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState('home');

@@ -40,6 +40,14 @@
   filter: drop-shadow(0 0 2em #646cffaa);
 }
 
+.logo.nextjs {
+  animation: none;
+}
+
+.logo.nextjs:hover {
+  filter: drop-shadow(0 0 2em #000000aa);
+}
+
 .logo.react {
   animation: spin 20s linear infinite;
 }
@@ -48,9 +56,7 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-.logo.graphql {
-
-}
+.logo.graphql {}
 
 .logo.graphql:hover {
   filter: drop-shadow(0 0 2em color(display-p3 .8824 0 .5961));

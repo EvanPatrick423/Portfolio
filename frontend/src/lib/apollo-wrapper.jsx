@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client/react';
 
@@ -26,7 +26,8 @@ function makeClient() {
 }
 
 export function ApolloWrapper({ children }) {
-  const client = makeClient();
+  // Use useMemo to prevent creating a new client on every render
+  const client = useMemo(() => makeClient(), []);
 
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 }
