@@ -21,6 +21,7 @@ FROM node:18-alpine AS frontend-development
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
 RUN npm ci
+COPY frontend/next.config.js ./
 # Source code will be mounted as volume
 EXPOSE 3000
 CMD ["npm", "run", "dev"]
