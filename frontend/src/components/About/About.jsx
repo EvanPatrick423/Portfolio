@@ -35,7 +35,6 @@ const About = () => {
                     <li>Next.js</li>
                     <li>JavaScript (ES6+)</li>
                     <li>HTML5 & CSS3</li>
-                    <li>TypeScript</li>
                   </ul>
                 </div>
                 
@@ -43,9 +42,9 @@ const About = () => {
                   <h4>Backend</h4>
                   <ul>
                     <li>Node.js</li>
-                    <li>Express.js</li>
                     <li>GraphQL</li>
                     <li>REST APIs</li>
+                    <li>Apollo Server</li>
                   </ul>
                 </div>
                 
@@ -54,8 +53,8 @@ const About = () => {
                   <ul>
                     <li>Git & GitHub</li>
                     <li>VS Code</li>
-                    <li>Next.js</li>
                     <li>Docker</li>
+                    <li>TypeScript</li>
                   </ul>
                 </div>
               </div>
@@ -124,14 +123,6 @@ const About = () => {
                 </div>
               </div>
 
-            </div>
-            
-            <div className="contact-section">
-              <h3>Let&apos;s Connect</h3>
-              <p>
-                I&apos;m always interested in new opportunities and collaborations. 
-                Feel free to reach out if you&apos;d like to discuss potential projects or just want to connect!
-              </p>
             </div>
           </div>
         </div>
