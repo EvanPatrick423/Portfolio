@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import './Home.css';
 
 function Home() {
   return (

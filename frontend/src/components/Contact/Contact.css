@@ -9,18 +9,19 @@
 .contact-content {
   max-width: 1200px;
   width: 100%;
-  margin: 0;
-  padding: 0;
+  margin: 0 auto;
+  padding: 2rem;
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .contact-header {
   text-align: center;
-  padding: 3rem 2rem 2rem;
+  padding: 1rem 0 2rem;
   
   color: white;
 }
@@ -43,15 +44,15 @@
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 3rem;
-  padding: 3rem;
+  padding: 0;
 }
 
 .email-disclaimer {
   background: rgba(255, 193, 7, 0.1);
   border-left: 4px solid #ffc107;
   border-radius: 0;
-  padding: 1rem 3rem;
-  margin: 0;
+  padding: 1rem 1.5rem;
+  margin: -2rem -2rem 2rem -2rem;
   border-top: 1px solid rgba(255, 193, 7, 0.2);
 }
 
@@ -190,7 +191,7 @@
   }
 
   .contact-header {
-    padding: 2rem 1.5rem 1.5rem;
+    padding: 1rem 0 1.5rem;
   }
 
   .contact-header h1 {
@@ -204,7 +205,7 @@
   .contact-body {
     grid-template-columns: 1fr;
     gap: 2rem;
-    padding: 2rem 1.5rem;
+    padding: 0;
   }
 
   .contact-info {
@@ -226,7 +227,7 @@
   }
 
   .contact-header {
-    padding: 1.5rem 1rem;
+    padding: 1rem 0 1rem;
   }
 
   .contact-header h1 {
@@ -234,7 +235,7 @@
   }
 
   .contact-body {
-    padding: 1.5rem 1rem;
+    padding: 0;
   }
 
   .form-group input,

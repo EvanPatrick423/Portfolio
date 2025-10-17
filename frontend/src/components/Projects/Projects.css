@@ -1,7 +1,6 @@
 .projects-page {
   min-height: 100vh;
-  margin-top: 1rem;
-  /*background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);*/
+  margin-top: 2rem;
 }
 
 .projects-container {
